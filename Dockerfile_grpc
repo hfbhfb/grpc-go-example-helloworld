@@ -1,0 +1,12 @@
+FROM centos:centos7.6.1810
+MAINTAINER hfb
+ENV MYPATH /usr/local
+WORKDIR /usr/local
+#RUN yum -y install net-tools
+#EXPOSE 80
+ADD ./greeter_server/greeter_server /greeter_server
+ADD ./greeter_client/greeter_client /greeter_client
+CMD echo /usr/local
+CMD echo "success--------------------ok"
+# 镜像制作需要死循环，方便在k8s中直接使用，不需要额外command，args
+CMD [ "sh", "-c", "/greeter_server " ]
